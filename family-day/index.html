@@ -14,22 +14,31 @@
         box-sizing: border-box;
       }
       body {
-        padding: 2vmax;
+        padding: 4vmax;
         background: #666;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
         color: #fff;
         line-height: 1.4;
         font-family: 'Fira Sans', sans-serif
       }
+      section {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      section > * + * {
+        margin-top: 4vmin;
+      }
+      .flex {
+        flex: 1;
+      }
       img {
-        flex: 1 100%;
+        height: 100%;
+        max-width: 100%;
         display: block;
+        margin: auto;
       }
       h1 {
         font-size: 8vmin;
-        padding: 1em 2em;
         text-align: center;
         font-weight: 400;
       }
@@ -39,11 +48,30 @@
         color: #FF9500;
         font-style: normal;
       }
+      .cta {
+        display: none;
+        font-size: 4vmin;
+        text-align: center;
+      }
+      .show {
+        display: block;
+      }
+      a {
+        color: #FF9500;
+        font-weight: 500;
+      }
     </style>
   </head>
   <body>
-    <img src="dino-banner.jpg">
-    <h1></h1>
+    <section>
+      <div class="flex">
+        <img src="dino-banner.jpg">
+      </div>
+      <h1></h1>
+      <div class="cta">
+        RSVP today at <a href="http://bit.ly/mozfamday">bit.ly/mozfamday</a>
+      </div>
+    </section>
     <script>
       function transmit(name, args) {
         if ('parent' in window) {
@@ -58,9 +86,10 @@
       var h1 = document.querySelector('h1');
       var d = new Date();
       if (d.getDate() < 10) {
-        h1.innerHTML = "Mozilla Bay Area Family Day is <em>Saturday, May 16th</em>. RSVP today!";
+        h1.innerHTML = 'Mozilla Bay Area Family Day is <em>Saturday, May 16th</em>.';
+        document.querySelector('.cta').classList.add('show');
       } else if (d.getDate() < 15) {
-        h1.innerHTML = "Mozilla Bay Area Family Day is <em>Saturday May 16th</em>. See you there!";
+        h1.innerHTML = 'Mozilla Bay Area Family Day is <em>Saturday May 16th</em>. See you there!';
       } else {
         transmit('reset');
       }
