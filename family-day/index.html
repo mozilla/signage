@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href='//fonts.googleapis.com/css?family=Fira+Sans:400,500' rel='stylesheet' type='text/css'>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        padding: 2vmax;
+        background: #666;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        color: #fff;
+        line-height: 1.4;
+        font-family: 'Fira Sans', sans-serif
+      }
+      img {
+        flex: 1 100%;
+        display: block;
+      }
+      h1 {
+        font-size: 8vmin;
+        padding: 1em 2em;
+        text-align: center;
+        font-weight: 400;
+      }
+      em {
+        white-space: nowrap;
+        font-weight: 500;
+        color: #FF9500;
+        font-style: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="dino-banner.jpg">
+    <h1></h1>
+    <script>
+      function transmit(name, args) {
+        if ('parent' in window) {
+          window.parent.postMessage({
+            'corsica': true,
+            'message': name,
+            'args': args
+          }, '*');
+        }
+      }
+
+      var h1 = document.querySelector('h1');
+      var d = new Date();
+      if (d.getDate() < 10) {
+        h1.innerHTML = "Mozilla Bay Area Family Day is <em>Saturday, May 16th</em>. RSVP today!";
+      } else if (d.getDate() < 15) {
+        h1.innerHTML = "Mozilla Bay Area Family Day is <em>Saturday May 16th</em>. See you there!";
+      } else {
+        transmit('reset');
+      }
+
+      setTimeout(function () {
+        transmit('reset');
+      }, 10);
+    </script>
+  </body>
+</html>
